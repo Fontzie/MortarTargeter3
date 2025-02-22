@@ -6,6 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- RadioGroup for default location selection -->
+    <RadioGroup
+        android:id="@+id/rgDefaultLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Default Location:"
+            android:textSize="24sp"
+            android:layout_marginBottom="32dp"/>
+
+        <RadioButton
+            android:id="@+id/rbLocation1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Huntly"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rbLocation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Karapiro"/>
+
+        <RadioButton
+            android:id="@+id/rbLocation3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Raglan"/>
+    </RadioGroup>
+
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"

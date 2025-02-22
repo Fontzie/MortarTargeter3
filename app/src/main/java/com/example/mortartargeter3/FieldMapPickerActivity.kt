@@ -134,12 +134,19 @@ class FieldMapPickerActivity : FragmentActivity(), OnMapReadyCallback {
         mMap.isMyLocationEnabled = true
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            location?.let {
-                myLocation = LatLng(it.latitude, it.longitude)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation!!, 15f))
+            if (location != null) {
+                myLocation = LatLng(location.latitude, location.longitude)
+            } else {
+                // Use fallback coordinates from the intent if current location is null.
+                val fallbackLat = intent.getDoubleExtra("fallback_lat", -37.7826)
+                val fallbackLon = intent.getDoubleExtra("fallback_lon", 175.2528)
+                myLocation = LatLng(fallbackLat, fallbackLon)
+            }
+            myLocation?.let {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 15f))
                 mMap.addMarker(
                     MarkerOptions()
-                        .position(myLocation!!)
+                        .position(it)
                         .title("My Location")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 )

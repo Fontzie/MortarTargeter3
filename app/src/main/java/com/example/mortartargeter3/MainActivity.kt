@@ -886,7 +886,11 @@ class MainActivity : AppCompatActivity(), OnMapsSdkInitializedCallback {
                     tvCurrentLocation.text = "Current Location: ${location.latitude}, ${location.longitude}"
                     fetchWindData(location.latitude, location.longitude)
                 } else {
-                    tvCurrentLocation.text = "Current Location: Unknown"
+                    // Current location is not available—use fallback coordinates from the intent.
+                    val fallbackLat = intent.getDoubleExtra("fallback_lat", -37.7826)
+                    val fallbackLon = intent.getDoubleExtra("fallback_lon", 175.2528)
+                    currentLocation = LatLng(fallbackLat, fallbackLon)
+                    tvCurrentLocation.text = "Default Location: ${fallbackLat}, ${fallbackLon}"
                 }
             }
         }
